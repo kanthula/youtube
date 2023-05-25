@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+       *{
+            padding: 0px;
+            margin: 0px;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #bell,#arrow{
+            width: 30px;
+            padding: 5px;
+            display: none;
+        }
+        #subscribeBut{
+            position: relative;
+            bottom: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 300px;
+            height: 60px;
+            border-radius: 200px;
+            border: none;
+            background-color: rgb(193, 188, 188);   
+            box-shadow: 2px 2px 2px black;         
+        }
+        #subscribeBut:hover{
+            background-color: rgb(222, 211, 211);
+        }
+        #status{
+            font-size: 30px;
+            letter-spacing: 5px;
+        }
+        #window{
+            padding-top: 30px;
+            width: 250px;
+            height: 180px;
+            background-color: rgba(167, 160, 160, 0.132);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 20px;
+            position: absolute;
+            bottom: 65px;
+            display: none;
+        }
+        .subbut{
+            width: 100%;
+            height: 40px;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+        .subbut:hover{
+            background-color: rgb(151,151,151);
+        }
+        .subbell{
+            width: 20px;
+            padding: 5px;
+        }
+        .substatus{
+            padding-left: 40px;
+            font-size: 20px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            display: block;
+        }
+        #a{
+            width: 35px;
+            padding-left: 10px;
+        }
+        #b{
+            width: 30px;
+            padding-left:15px;
+        }
+        #c{
+            width: 30px;
+            padding-left: 20px;
+        }
+        #d{
+            padding-left: 20px;
+        }
+        #unsubscribe{
+            width: 350px;
+            height: 180px;
+            background-color: rgb(96,96,96);
+            border-radius: 20px;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: none;
+        }
+        #message{
+            font-size: 20px;
+            color: white;
+            padding-top: 60px;
+            padding-left: 2px;
+        }
+        #cancel,#unsub{
+            position: absolute;
+            bottom: 20px;
+            width: 120px;
+            height: 30px;
+            background-color: transparent;
+            border: none;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        #cancel{
+            right: 150px;
+            color: white;
+        }
+        #unsub{
+            right: 10px;
+            color: rgb(67,178,247);
+        }
+        #cancel:hover{
+           background-color: rgba(169,169,169,0.627);
+           border-radius: 200px;
+        }
+        #unsub:hover{
+            background-color: rgba(115,147,164,0.627);
+            border-radius: 200px;
+        } 
+        p{
+            font-weight: bold;
+            font-size: 25px;
+            position: absolute;
+            top: 5px;
+            left: 45px;
+            
+        }
+    </style>
+</head>
+<body>
+    <button id="subscribeBut" value="Subscribe" onclick="subscribe()">
+    <img src="./normal.png" id="bell">
+    <span id="status">Subscribe</span>
+    <img src="./arrow.png" id="arrow">
+</button>
+<div id="window">
+    <p>Notifications</p>
+<button onblur="remove()" onmousedown="allbell()" class="subbut">
+    <img class="subbell" id="a" src="./all.png">
+     <span class="substatus">All</span>
+</button>
+<button onblur="remove()" onmousedown="normalBell()" class="subbut">
+    <img class="subbell" id="d" src="./normal.png" >
+     <span class="substatus">Personalised</span>
+</button>
+     <button onblur="remove()" onmousedown="nonebell()" class="subbut">
+        <img class="subbell" id="b" src="./muted.png">
+         <span class="substatus">None</span>
+    </button>
+    <button onblur="remove()" onmousedown="unsub()" class="subbut">
+        <img class="subbell" id="c" src="./unsub.png">
+         <span class="substatus">Unsubscribe</span>
+    </button>
+</div>
+<div id="unsubscribe">
+    <h6 id="message">Unsubscribe from Slaying The Dragon?</h6>
+    <button id="cancel" onmousedown="remove()">Cancel</button>
+    <button id="unsub" onmousedown="unsubscribed()">Unsubscribe</button>
+</div>
+<script>
+    function subscribe()
+    {
+        var status=document.getElementById("subscribeBut").value
+        console.log(status)
+        if( status=="Subscribe")
+        {
+            document.getElementById("status").innerHTML="Subscribed"
+            document.getElementById("bell").style.display="block"
+            document.getElementById("arrow").style.display="block"
+            document.getElementById("subscribeBut").setAttribute("value","subscribed")
+        }
+        else{
+            document.getElementById("window").style.display="block"
+        }
+    }
+    function remove()
+    {
+        document.getElementById("window").style.display="none"
+        document.getElementById("unsubscribe").style.display="none"
+    }
+    function allbell()
+    {
+        document.getElementById("window").style.display=("none")
+        document.getElementById("bell").setAttribute("src","./all.png")
+        console.log("click")
+    }
+    function normalBell()
+    {
+        document.getElementById("window").style.display="none"
+        document.getElementById("bell").setAttribute("src","./normal.png")
+        console.log("click")
+    }
+    function nonebell()
+    {
+        document.getElementById("window").style.display="none"
+        document.getElementById("bell").setAttribute("src","./muted.png")
+        console.log("click")
+    }
+    function unsub()
+    {
+        document.getElementById("window").style.display="none"
+        document.getElementById("unsubscribe").style.display="block"
+    }
+    function unsubscribed()
+    {
+        document.getElementById("unsubscribe").style.display="none"
+        document.getElementById("status").innerHTML="Subscribe"
+        document.getElementById("bell").style.display="none"
+        document.getElementById("arrow").style.display="none"
+        document.getElementById("subscribeBut").setAttribute("value","Subscribe")
+    }
+    
+</script>
+    
+</body>
+</html>
